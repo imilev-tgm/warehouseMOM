@@ -7,8 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tradearea.model.WarehouseData;
 
+
+import org.apache.activemq.ActiveMQConnection;
+import org.apache.activemq.ActiveMQConnectionFactory;
+
+import javax.jms.*;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
+
 @RestController
 public class WarehouseController {
+
+    private static String user = ActiveMQConnection.DEFAULT_USER;
+    private static String password = ActiveMQConnection.DEFAULT_PASSWORD;
+    private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
+    private static String subject = "Warehouse_001";
 
     @Autowired
     private WarehouseService service;
@@ -36,5 +50,11 @@ public class WarehouseController {
     public String warehouseTransfer( @PathVariable String inID ) {
         return service.getGreetings("Warehouse.Transfer!");
     }
+
+    @GetMapping("/warehouse/sendData")
+    public String sendData() {
+        return "";
+    }
+
 
 }
